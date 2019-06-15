@@ -41,13 +41,45 @@ li {
 }
 
 #tm-mm {
-  color: blue;
   &::after { content: attr(data-mm); }
 }
 
 #tm-hr {
-  background: yellow;
+  font-weight: bold;
   &::after { content: attr(data-hr); }
+  &[data-hr='22'],
+  &[data-hr='23'],
+  &[data-hr='00'],
+  &[data-hr='01'],
+  &[data-hr='02'],
+  &[data-hr='03'],
+  &[data-hr='04'],
+  &[data-hr='05'],
+  &[data-hr='06'] {
+    background: lightgray;
+  }
+  &[data-hr='07'],
+  &[data-hr='08'] {
+    background: magenta;
+  }
+  &[data-hr='09'],
+  &[data-hr='10'],
+  &[data-hr='11'] {
+    background: lightblue;
+  }
+  &[data-hr='12'],
+  &[data-hr='13'],
+  &[data-hr='15'],
+  &[data-hr='16'],
+  &[data-hr='17'] {
+    background: skyblue;
+  }
+  &[data-hr='18'],
+  &[data-hr='19'],
+  &[data-hr='20'],
+  &[data-hr='21'] {
+    background: gold;
+  }
 }
 
 #tm-dt {  // date
