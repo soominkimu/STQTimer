@@ -1,10 +1,88 @@
+@font-face {
+  font-family: 'digital-7';
+  src: url('./digital-7 (mono).ttf');
+}
+$digital-font: 'digital-7', 'Orbitron', sans-serif;
+
 .App {
-  text-align: center;
+  font-family: $digital-font;
+  text-align: right;
+  margin-right: 200px;
+  line-height: 1.5em;
+}
+
+h1 {
+  &::first-letter {
+    font-size: 150%;
+  }
+}
+
+li {
+  list-style-type: none;
 }
 
 #second {
   text-align: center;
   font-size: xx-large;
-  color: Navy;
   background: yellow;
+}
+
+#tm-co {  // colon separator
+  &::before {
+    content: ':';
+  }
+  animation: blink 1s infinite;
+}
+
+#tm-ss {
+  font-size: small;
+  color: green;
+  &::after { content: attr(data-ss); }
+}
+
+#tm-mm {
+  color: blue;
+  &::after { content: attr(data-mm); }
+}
+
+#tm-hr {
+  background: yellow;
+  &::after { content: attr(data-hr); }
+}
+
+#tm-dt {  // date
+  &::after {
+    content: attr(data-mo) "/" attr(data-dd) "/" attr(data-yr);
+  }
+  &[data-dw='0'] {
+    color: red;
+    &::before { content: "Sun "; }
+  }
+  &[data-dw='1'] { &::before { content: "Mon "; } }
+  &[data-dw='2'] { &::before { content: "Tue "; } }
+  &[data-dw='3'] { &::before { content: "Wed "; } }
+  &[data-dw='4'] { &::before { content: "Thu "; } }
+  &[data-dw='5'] { &::before { content: "Fri "; } }
+  &[data-dw='6'] {
+    color: blue;
+    &::before { content: "Sat "; }
+  }
+}
+
+#tm-sd {  // date short form: no year and dow
+  &::after {
+    content: attr(data-mo) "/" attr(data-dd);
+  }
+  &[data-dw='0'] { color: red; }
+  &[data-dw='6'] { color: blue; }
+}
+
+#tm-ct {  // city name
+  font-family: Helvetica, sans-serif;
+  color: DarkGray;
+  &::after { content: " " }
+}
+
+@keyframes blink {
+  to { opacity: 0; }
 }

@@ -25,12 +25,19 @@ const useTimer = callback => {
     const fireSS = v => cB.current({type: 'TM_SS', payload: v});
     const fireMM = v => cB.current({type: 'TM_MM', payload: v});
     const fireHR = v => cB.current({type: 'TM_HR', payload: v});
-    const fireDT = v => cB.current({type: 'TM_DT', payload: v});
-    const df = new Date();  // Initial setter before setInterval's firing
-    fireSS(df.getSeconds());
-    fireMM(df.getMinutes());
-    fireHR(df.getHours());
-    fireDT(df.getDate());
+    const fireDT = d => cB.current({type: 'TM_DT', payload:
+      {
+        y: d.getFullYear(),
+        m: d.getMonth()+1,
+        d: d.getDate(),
+        w: d.getDay() // Sun - Sat: 0 - 6
+      }
+    });
+    const d0 = new Date();  // Initial setter before setInterval's firing
+    fireSS(d0.getSeconds());
+    fireMM(d0.getMinutes());
+    fireHR(d0.getHours());
+    fireDT(d0);
 
     const id = setInterval(() => {
       const d = new Date();
@@ -43,8 +50,7 @@ const useTimer = callback => {
           const hr = d.getHours();
           fireHR(hr);
           if (hr === 0) {
-            const dt = d.getDate();
-            fireDT(dt);
+            fireDT(d);
           }
         }
       }
@@ -56,54 +62,67 @@ const useTimer = callback => {
 
 export const TSecond = props => {
   console.log("Second()::render");
-  //const [state, setState] = useState(0);
   const el = React.useRef(null);  // imperatively accessing DOM
-  const setState = v => el.current.textContent = lZ(v);
-  const callback = v => { setState(v); props.onSecond && props.onSecond(v); }
-
+  const callback = v => {
+    el.current.setAttribute("data-ss", lZ(v));  // textContent +1 DOM Node problem
+    props.onSecond && props.onSecond(v);
+  }
   const dispatch = ({type, payload}) => {
     switch (type) {
       case 'TM_SS': callback(payload); break;
       case 'TM_MM': props.onMinute && props.onMinute(payload); break;
       case 'TM_HR': props.onHour   && props.onHour(payload);   break;
       case 'TM_DT': props.onDate   && props.onDate(payload);   break;
-      default: throw new Error('Unexpected action!');
+      default: throw new Error('action not defined!');
     }
   }
   useTimer(dispatch);
-  return <span ref={el}></span>;
+  return <span ref={el} id="tm-ss" />;
 }
 
 export const TMinute = props => {
   console.log("Minute()::render");
   const { onMinute, ...others } = props; // no to be overwritten
-  //const [state, setState] = useState(0);
   const el = React.useRef(null);
-  const setState = v => el.current.textContent = lZ(v);
-  const callback = v => { setState(v); onMinute && onMinute(v); }
-  return <><span ref={el}></span>:<TSecond onMinute={callback} {...others} /></>;
+  const callback = v => {
+    el.current.setAttribute("data-mm", lZ(v));
+    onMinute && onMinute(v);
+  }
+  return <><span ref={el} id="tm-mm" /><span id="tm-co" /><TSecond onMinute={callback} {...others} /></>;
 }
 
 export const THour = props => {
   console.log("Hour()::render");
   const { onHour, ...others } = props;
-  //const [state, setState] = useState(0);
   const el = React.useRef(null);
-  const setState = v => el.current.textContent = lZ(v);
-  const callback = v => { setState(v); onHour && onHour(v); }
-  return <><span ref={el}></span>:<TMinute onHour={callback} {...others} /></>;
+  const callback = v => {
+    el.current.setAttribute("data-hr", lZ(v));
+    onHour && onHour(v);
+  }
+  return <><span ref={el} id="tm-hr" /><span id="tm-co" /><TMinute onHour={callback} {...others} /></>;
 }
 
 export const TDate = props => {
   console.log("Date()::render");
   const { onDate, ...others } = props;
-  //const [state, setState] = useState(0);
   const el = React.useRef(null);
-  const setState = v => el.current.textContent = lZ(v);
-  const callback = v => { setState(v); onDate && onDate(v); }
-  return <div><span ref={el}></span> <THour onDate={callback} {...others} /></div>;
+  const callback = v => {
+    el.current.setAttribute("data-dw", v.w);
+    el.current.setAttribute("data-mo", lZ(v.m));
+    el.current.setAttribute("data-dd", lZ(v.d));
+    el.current.setAttribute("data-yr", lZ(v.y));
+    onDate && onDate(v);
+  }
+  return <div><span ref={el} id="tm-dt" /> <THour onDate={callback} {...others} /></div>;
 }
 
 /*
       <TDate dt={ (d) => console.log("Daily job", d) } mm={console.log} />
 */
+
+// get date and time of the specified offset city
+export const getDateOffset = offset => {
+  const d = new Date();
+  const utc = d.getTime() + (d.getTimezoneOffset() * 60000);  // UTC time in msec
+  return new Date(utc + (3600000 * offset));
+}
