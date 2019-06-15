@@ -6,6 +6,7 @@ $digital-font: 'digital-7', 'Orbitron', sans-serif;
 
 .App {
   font-family: $digital-font;
+  font-size: 1.5rem;
   text-align: right;
   margin-right: 200px;
   line-height: 1.5em;
@@ -19,12 +20,6 @@ h1 {
 
 li {
   list-style-type: none;
-}
-
-#second {
-  text-align: center;
-  font-size: xx-large;
-  background: yellow;
 }
 
 #tm-co {  // colon separator
@@ -47,6 +42,9 @@ li {
 #tm-hr {
   font-weight: bold;
   &::after { content: attr(data-hr); }
+  &:hover {
+    background: yellow;
+  }
   &[data-hr='22'],
   &[data-hr='23'],
   &[data-hr='00'],
@@ -56,29 +54,37 @@ li {
   &[data-hr='04'],
   &[data-hr='05'],
   &[data-hr='06'] {
-    background: lightgray;
+    &::before { content: '🌒'; }
+    //background: lightgray;
   }
   &[data-hr='07'],
   &[data-hr='08'] {
-    background: magenta;
+    &::before { content: '🥯'; }
+    //background: magenta;
   }
   &[data-hr='09'],
   &[data-hr='10'],
   &[data-hr='11'] {
-    background: lightblue;
+    &::before { content: '✍️'; }
+    //background: lightblue;
   }
-  &[data-hr='12'],
+  &[data-hr='12'] {
+    &::before { content: '🍱'; }
+  }
   &[data-hr='13'],
+  &[data-hr='14'],
   &[data-hr='15'],
   &[data-hr='16'],
   &[data-hr='17'] {
-    background: skyblue;
+    &::before { content: '✍️'; }
+    //background: skyblue;
   }
   &[data-hr='18'],
   &[data-hr='19'],
   &[data-hr='20'],
   &[data-hr='21'] {
-    background: gold;
+    &::before { content: '🍺'; }
+    //background: gold;
   }
 }
 
@@ -112,7 +118,6 @@ li {
 #tm-ct {  // city name
   font-family: Helvetica, sans-serif;
   color: DarkGray;
-  &::after { content: " " }
 }
 
 @keyframes blink {
