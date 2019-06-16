@@ -99,7 +99,8 @@ export const THour = props => {
     el.current.setAttribute("data-hr", lZ(v));
     onHour && onHour(v);
   }
-  return <><span ref={el} id="tm-hr" /><span id="tm-co" /><TMinute onHour={callback} {...others} /></>;
+  return <span id="tm"><span ref={el} id="tm-hr" /><span id="tm-co" />
+    <TMinute onHour={callback} {...others} /></span>;
 }
 
 export const TDate = props => {

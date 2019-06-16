@@ -1,5 +1,6 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { lZ, TDate } from './sq-time';
+import { TBtn, Webcam } from './webcam';
 import './App.scss';
 
 function App() {
@@ -20,23 +21,31 @@ function App() {
     {el: useRef(null), em: useRef(null), cs: '🇦🇺', ct: 'Melbourne',     tz: 'Australia/Melbourne'},
   ];
 
-  const tzDate = tz => new Date(new Date().toLocaleString('en-US', {timeZone: tz}));
-
   const updateHour = () => {  // onHour change
-    const nowTZ = d =>
+    TZ.forEach( z => {
+      const d = new Date(new Date().toLocaleString('en-US', {timeZone: z.tz}));
+      z.el.current.setAttribute("data-dw", d.getDay());
+      z.el.current.setAttribute("data-mo", lZ(d.getMonth()+1));
+      z.el.current.setAttribute("data-dd", lZ(d.getDate()));
+      z.el.current.setAttribute("data-yr", lZ(d.getFullYear()));
+      z.el.current.setAttribute("data-hr", lZ(d.getHours()));
+    });
+  }
+  /*
       '<span id="tm-sd" data-dw=' + d.getDay()          +
                       ' data-mo=' + lZ(d.getMonth()+1)  +
                       ' data-dd=' + lZ(d.getDate())     +
                       ' data-yr=' + lZ(d.getFullYear()) + '></span> ' +
       '<span id="tm-hr" data-dw=' + d.getDay()          +
                       ' data-hr=' + lZ(d.getHours())    + '></span>';
-    TZ.forEach( z => z.el.current.innerHTML = nowTZ(tzDate(z.tz)) );
-  }
+   * */
 
   const updateMinute = (m) => {  // onMinute change
     //const nowTZ = d => lZ(d.getMinutes());  // Most of countries will be ok with the same minute
     TZ.forEach( z => z.em.current.setAttribute("data-mm", lZ(m)) );
   }
+
+  const [webcam, setWebcam] = useState(false);
 
   return (
     <div className="App">
@@ -46,10 +55,16 @@ function App() {
         onHour={updateHour}
         onMinute={m => updateMinute(m)}
       />
-      {TZ.map((z, i) => <li key={i}>
-          <span id="tm-ct" data-ct={z.ct} data-cs={z.cs} /> <span ref={z.el} />
+      {TZ.map((z, i) =>
+        <li key={i}>
+          <span id="tm-ct" data-ct={z.ct} data-cs={z.cs} /> <span ref={z.el} id="tm-sd" />
           <span id="tm-co" /><span ref={z.em} id="tm-mm" />
         </li>)}
+      <TBtn
+        onClick={ ()=>setWebcam(!webcam) }>
+        Webcam {webcam ? 'Off' : 'On'}
+      </TBtn>
+      {webcam && <Webcam />}
     </div>
   );
 }
