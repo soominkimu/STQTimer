@@ -8,13 +8,13 @@ $digital-font: 'digital-7', 'Orbitron', sans-serif;
   font-family: $digital-font;
   font-size: 1.5rem;
   text-align: right;
-  margin-right: 200px;
+  margin-right: 10%;
   line-height: 1.5em;
 }
 
 h1 {
   &::first-letter {
-    font-size: 150%;
+    font-size: 130%;
   }
 }
 
@@ -31,7 +31,7 @@ li {
 
 #tm-ss {
   font-size: small;
-  color: green;
+  color: Green;
   &::after { content: attr(data-ss); }
 }
 
@@ -41,6 +41,8 @@ li {
 
 #tm-hr {
   font-weight: bold;
+  border-radius: 25%;
+  border-bottom: 4px solid GreenYellow;
   &::after { content: attr(data-hr); }
   &:hover {
     background: yellow;
@@ -62,21 +64,28 @@ li {
     &::before { content: '🥯'; }
     //background: magenta;
   }
-  &[data-hr='09'],
-  &[data-hr='10'],
-  &[data-hr='11'] {
-    &::before { content: '✍️'; }
-    //background: lightblue;
-  }
   &[data-hr='12'] {
     &::before { content: '🍱'; }
   }
+  &[data-hr='09'],
+  &[data-hr='10'],
+  &[data-hr='11'],
   &[data-hr='13'],
   &[data-hr='14'],
   &[data-hr='15'],
   &[data-hr='16'],
   &[data-hr='17'] {
-    &::before { content: '✍️'; }
+    &[data-dw='0'],
+    &[data-dw='6'] {
+      &::before { content: '⚽️'; }
+    }
+    &[data-dw='1'],
+    &[data-dw='2'],
+    &[data-dw='3'],
+    &[data-dw='4'],
+    &[data-dw='5'] {
+      &::before { content: '✍️'; }
+    }
     //background: skyblue;
   }
   &[data-hr='18'],
@@ -89,6 +98,9 @@ li {
 }
 
 #tm-dt {  // date
+  font-size: xx-large;
+  border-radius: 20%;
+  border-bottom: 4px solid LightGray;
   &::after {
     content: attr(data-mo) "/" attr(data-dd) "/" attr(data-yr);
   }
@@ -105,6 +117,7 @@ li {
     color: blue;
     &::before { content: "Sat "; }
   }
+  background: LemonChiffon;
 }
 
 #tm-sd {  // date short form: no year and dow
@@ -115,9 +128,26 @@ li {
   &[data-dw='6'] { color: blue; }
 }
 
+%text-emphasis {
+  font-weight: bold;
+  color: black;
+  border-radius: 50%;
+  border: 8px solid rgba(255,255,0,.4);
+}
+
 #tm-ct {  // city name
   font-family: Helvetica, sans-serif;
   color: DarkGray;
+  &::before {
+    content: attr(data-ct);
+  }
+  &::after {
+    content: ' ' attr(data-cs);
+  }
+  &[data-ct='Tokyo'],
+  &[data-ct='San Francisco'] {
+    @extend %text-emphasis;
+  }
 }
 
 @keyframes blink {

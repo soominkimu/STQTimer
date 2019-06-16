@@ -27,8 +27,9 @@ function App() {
       '<span id="tm-sd" data-dw=' + d.getDay()          +
                       ' data-mo=' + lZ(d.getMonth()+1)  +
                       ' data-dd=' + lZ(d.getDate())     +
-                      ' data-dd=' + lZ(d.getFullYear()) + '></span> ' +
-      '<span id="tm-hr" data-hr=' + lZ(d.getHours())    + '></span>';
+                      ' data-yr=' + lZ(d.getFullYear()) + '></span> ' +
+      '<span id="tm-hr" data-dw=' + d.getDay()          +
+                      ' data-hr=' + lZ(d.getHours())    + '></span>';
     TZ.forEach( z => z.el.current.innerHTML = nowTZ(tzDate(z.tz)) );
   }
 
@@ -39,18 +40,20 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Timer</h1>
+      <h1>World Clock</h1>
       <TDate
         onDate={ d => console.log("Daily job", d) }
         onHour={updateHour}
         onMinute={m => updateMinute(m)}
       />
       {TZ.map((z, i) => <li key={i}>
-          <span id="tm-ct">{z.ct}</span> <span role="img" aria-label="city">{z.cs}</span> <span ref={z.el} />
+          <span id="tm-ct" data-ct={z.ct} data-cs={z.cs} /> <span ref={z.el} />
           <span id="tm-co" /><span ref={z.em} id="tm-mm" />
         </li>)}
     </div>
   );
 }
+
+//  <span role="img" aria-label="city">{z.cs}</span>
 
 export default App;
