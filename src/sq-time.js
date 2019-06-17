@@ -16,29 +16,29 @@ export const lZ = n => (n < 10) ? '0' + n : n.toString();
 
 const useTimer = callback => {
   const cB = useRef();
+  const fireSS = v => cB.current({type: 'TM_SS', payload: v});
+  const fireMM = v => cB.current({type: 'TM_MM', payload: v});
+  const fireHR = v => cB.current({type: 'TM_HR', payload: v});
+  const fireDT = d => cB.current({type: 'TM_DT', payload:
+    {
+      y: d.getFullYear(),
+      m: d.getMonth()+1,
+      d: d.getDate(),
+      w: d.getDay() // Sun - Sat: 0 - 6
+    }
+  });
 
   useEffect(() => {
     cB.current = callback;
-  }, [callback]);
-
-  useEffect(() => {
-    const fireSS = v => cB.current({type: 'TM_SS', payload: v});
-    const fireMM = v => cB.current({type: 'TM_MM', payload: v});
-    const fireHR = v => cB.current({type: 'TM_HR', payload: v});
-    const fireDT = d => cB.current({type: 'TM_DT', payload:
-      {
-        y: d.getFullYear(),
-        m: d.getMonth()+1,
-        d: d.getDate(),
-        w: d.getDay() // Sun - Sat: 0 - 6
-      }
-    });
     const d0 = new Date();  // Initial setter before setInterval's firing
     fireSS(d0.getSeconds());
     fireMM(d0.getMinutes());
     fireHR(d0.getHours());
     fireDT(d0);
+    console.log("useTimer::useEffect: callback set");
+  }, [callback]);
 
+  useEffect(() => {
     const id = setInterval(() => {
       const d = new Date();
       const ss = d.getSeconds();
@@ -55,7 +55,7 @@ const useTimer = callback => {
         }
       }
     }, 1000);
-    console.log("useEffect()", id);
+    console.log("useTimer::useEffect: setInterval", id);
     return () => clearInterval(id);
   }, []);
 }

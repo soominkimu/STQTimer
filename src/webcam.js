@@ -1,16 +1,16 @@
 import React, { useRef, useEffect } from 'react';
 
-export const Webcam = () => {
+export const Webcam = ({bUser=true}) => {
   console.log("Webcam::render");
   const rVE    = useRef(null);  // ref to Video Element
   const rTitle = useRef(null);
   // 'mediaDevices' not supported in mobile Android and Amazon Fire tablet
+  const constraints = { video: { facingMode: bUser ? 'user' : 'environment' }};
 
   useEffect(() => {
     const mediaAvailable = () => 'mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices;
 
     if (mediaAvailable()) {
-      const constraints = { video: { facingMode: 'user' }}; // 'environment'
       let videoStream;
       navigator.mediaDevices.getUserMedia(constraints)
         .then(function(stream) {
@@ -39,7 +39,7 @@ export const Webcam = () => {
     } else {
       alert("mediaDevices not supported!");
     }
-  }, [])
+  }, [constraints])
 
   const aSize = [
     {width: '70%',   height: '70%'},

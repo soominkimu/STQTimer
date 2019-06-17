@@ -30,12 +30,16 @@ li {
 }
 
 #tm-ss {
-  font-size: medium;
-  color: Green;
+  color: Gold;
   &::after { content: attr(data-ss); }
 }
 
 #tm-mm {
+  font-size: xx-large;
+  &::after { content: attr(data-mm); }
+}
+
+#tm-dm {
   &::after { content: attr(data-mm); }
 }
 
@@ -157,6 +161,7 @@ li {
   to { opacity: 0; }
 }
 
+// Webcam
 .vid-cont {
   position: fixed;
   left: 0;
@@ -191,7 +196,7 @@ li {
   box-shadow: 0 0 10px 6px Cyan;
   object-fit: cover;
   z-index: -100;
-  filter: brightness(2.5);
+  //filter: brightness(2.5);
   //pointer-events: none;
   transition: all 1s ease-in;
 }
