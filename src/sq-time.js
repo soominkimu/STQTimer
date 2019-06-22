@@ -12,7 +12,7 @@ import React, { useRef, useEffect } from 'react';
  *       <TSecond dt={} hr={} mm={} />   contains Timer (custom Hook that encapsulates setInterval())
 */
 
-export const lZ = n => (n < 10) ? '0' + n : n.toString();
+export const lZ = n => (n < 10) ? '0' + n : n.toString();  // leading Zero making a two digit number string
 
 const useTimer = callback => {
   const cB = useRef();

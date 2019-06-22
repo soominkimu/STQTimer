@@ -58,7 +58,7 @@ const WorldClock = () => {
         onHour={updateHour}
         onMinute={m => updateMinute(m)}
       />
-      {TZ.filter(z => z.lv <= showLv).map((z, i) =>
+      {TZ.map((z, i) =>
         <li key={i}>
           <span id="tm-ct" data-ct={z.ct} data-cs={z.cs} /> <span ref={z.el} id="tm-sd" />
           <span id="tm-co" /><span ref={z.em} id="tm-dm" />
@@ -67,14 +67,12 @@ const WorldClock = () => {
   );
 }
 
-function App() {
-  console.log("App()::render");
+const WebcamTest = () => {
   const [webcam, setWebcam] = useState(true);
   const [face,   setFace]   = useState(true);
 
   return (
-    <div className="App">
-      <WorldClock />
+    <>
       <TBtn
         onClick={ ()=>setWebcam(!webcam) }>
         Webcam {webcam ? 'Off' : 'On'}
@@ -85,6 +83,17 @@ function App() {
         Face {face ? 'Environment' : 'User'}
       </TBtn>
       {webcam && <Webcam bUser={face} />}
+    </>
+  );
+}
+
+function App() {
+  console.log("App()::render");
+
+  return (
+    <div className="App">
+      <WorldClock />
+      <WebcamTest />
     </div>
   );
 }

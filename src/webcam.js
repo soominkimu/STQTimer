@@ -90,15 +90,14 @@ export const Webcam = ({bUser=true}) => {
   const handleShape  = () => { rVE.current.style.borderRadius = aShape[ sh.current++ % aShape.length]; }
   const handleReset  = () => { rVE.current.setAttribute("style", ""); }
 
-  // controls
   return (
     <div ref={rTitle} className="vid-cont">
-      <video ref={rVE} autoPlay={true} className="vid-fw" />
-      <TBtn onClick={ () => handleSize() }>Toggle Sizes</TBtn>
-      <TBtn onClick={ () => handleFilter() }>Toggle Filters</TBtn>
-      <TBtn onClick={ () => handleTrans() }>Toggle Transforms</TBtn>
-      <TBtn onClick={ () => handleShape() }>Toggle Shapes</TBtn>
-      <TBtn onClick={ () => handleReset() }>Reset All</TBtn>
+      <video ref={rVE} playsInline={true} autoPlay={true} controls={true} className="vid-fw" />
+      <TBtn onClick={ () => handleSize() }>Size</TBtn>
+      <TBtn onClick={ () => handleFilter() }>Filter</TBtn>
+      <TBtn onClick={ () => handleTrans() }>Transform</TBtn>
+      <TBtn onClick={ () => handleShape() }>Shape</TBtn>
+      <TBtn onClick={ () => handleReset() }>Reset</TBtn>
     </div>
   );
 }
