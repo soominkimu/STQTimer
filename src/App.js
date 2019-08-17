@@ -41,7 +41,7 @@ const WorldClock = () => {
                       ' data-hr=' + lZ(d.getHours())    + '></span>';
    * */
 
-  const updateMinute = (m) => {  // onMinute change
+  const updateMinute = m => {  // onMinute change
     //const nowTZ = d => lZ(d.getMinutes());  // Most of countries will be ok with the same minute
     TZ.forEach( z => z.em.current.setAttribute("data-mm", lZ(m)) );
   }

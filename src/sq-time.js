@@ -13,6 +13,7 @@ import React, { useRef, useEffect } from 'react';
 */
 
 export const lZ = n => (n < 10) ? '0' + n : n.toString();  // leading Zero making a two digit number string
+// or use n.toString().padStart(2, "0");  // ES6
 
 const useTimer = callback => {
   const cB = useRef();
@@ -67,6 +68,7 @@ export const TSecond = props => {
     el.current.setAttribute("data-ss", lZ(v));  // textContent +1 DOM Node problem
     props.onSecond && props.onSecond(v);
   }
+  // make dispatch(action) call reducer(state, action)
   const dispatch = ({type, payload}) => {
     switch (type) {
       case 'TM_SS': callback(payload); break;
