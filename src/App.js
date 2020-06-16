@@ -1,3 +1,5 @@
+// For performance, directly update DOM elements (imperatively)
+// not using React rendering cycles.
 import React, { useRef, useState } from 'react';
 import { lZ, TDate } from './sq-time';
 import { TBtn, Webcam } from './webcam';
@@ -60,15 +62,17 @@ const WorldClock = () => {
       />
       {TZ.map((z, i) =>
         <li key={i}>
-          <span id="tm-ct" data-ct={z.ct} data-cs={z.cs} /> <span ref={z.el} id="tm-sd" />
-          <span id="tm-co" /><span ref={z.em} id="tm-dm" />
+          <span id="tm-ct" data-ct={z.ct} data-cs={z.cs} />
+          <span ref={z.el} id="tm-sd" />
+          <span id="tm-co" />
+          <span ref={z.em} id="tm-dm" />
         </li>)}
     </>
   );
 }
 
 const WebcamTest = () => {
-  const [webcam, setWebcam] = useState(true);
+  const [webcam, setWebcam] = useState(false);
   const [face,   setFace]   = useState(true);
 
   return (
