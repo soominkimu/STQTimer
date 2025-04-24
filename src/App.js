@@ -3,7 +3,7 @@
 import React, { useRef, useState } from 'react';
 import { lZ, TDate } from './sq-time';
 import { TBtn, Webcam } from './webcam';
-import './App.scss';
+import './App.css';
 
 const WorldClock = () => {
   const [showLv, setShowLv] = useState(3);

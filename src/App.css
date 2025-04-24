@@ -1,0 +1,230 @@
+@charset "UTF-8";
+@font-face {
+  font-family: "digital-7";
+  src: url("./digital-7 (mono).ttf");
+}
+.App {
+  font-family: "digital-7", "Orbitron", sans-serif;
+  font-size: 1.2rem;
+  text-align: right;
+  margin-right: 10%;
+  line-height: 1.5em;
+}
+
+h1 {
+  margin-top: 50px;
+}
+h1::first-letter {
+  font-size: 130%;
+}
+
+li {
+  list-style-type: none;
+  overflow: hidden;
+}
+
+#tm-co {
+  animation: blink 1s infinite;
+}
+#tm-co::before {
+  content: ":";
+}
+
+#tm-ss {
+  color: DarkGreen;
+}
+#tm-ss::after {
+  content: attr(data-ss);
+}
+
+#tm-mm {
+  font-size: xx-large;
+}
+#tm-mm::after {
+  content: attr(data-mm);
+}
+
+#tm-dm::after {
+  content: attr(data-mm);
+}
+
+#tm-hr {
+  font-size: xx-large;
+}
+#tm-hr::after {
+  content: attr(data-hr);
+}
+
+#tm {
+  padding-top: 10px;
+  background: rgba(244, 248, 220, 0.4);
+  border: 4px solid rgba(144, 238, 144, 0.6);
+}
+
+#tm-sd {
+  border-radius: 25%;
+  border-bottom: 4px solid rgba(173, 255, 47, 0.3);
+}
+#tm-sd::after {
+  content: " " attr(data-mo) "/" attr(data-dd) " " attr(data-hr);
+}
+#tm-sd:hover {
+  background: rgba(255, 255, 0, 0.3);
+}
+#tm-sd[data-dw="0"] {
+  color: red;
+}
+#tm-sd[data-dw="6"] {
+  color: blue;
+}
+#tm-sd[data-hr="22"]::before, #tm-sd[data-hr="23"]::before, #tm-sd[data-hr="00"]::before, #tm-sd[data-hr="01"]::before, #tm-sd[data-hr="02"]::before, #tm-sd[data-hr="03"]::before, #tm-sd[data-hr="04"]::before, #tm-sd[data-hr="05"]::before, #tm-sd[data-hr="06"]::before {
+  content: "🌒";
+}
+#tm-sd[data-hr="07"]::before, #tm-sd[data-hr="08"]::before {
+  content: "☕️";
+}
+#tm-sd[data-hr="12"]::before {
+  content: "🍱";
+}
+#tm-sd[data-hr="09"][data-dw="0"]::before, #tm-sd[data-hr="09"][data-dw="6"]::before, #tm-sd[data-hr="10"][data-dw="0"]::before, #tm-sd[data-hr="10"][data-dw="6"]::before, #tm-sd[data-hr="11"][data-dw="0"]::before, #tm-sd[data-hr="11"][data-dw="6"]::before, #tm-sd[data-hr="13"][data-dw="0"]::before, #tm-sd[data-hr="13"][data-dw="6"]::before, #tm-sd[data-hr="14"][data-dw="0"]::before, #tm-sd[data-hr="14"][data-dw="6"]::before, #tm-sd[data-hr="15"][data-dw="0"]::before, #tm-sd[data-hr="15"][data-dw="6"]::before, #tm-sd[data-hr="16"][data-dw="0"]::before, #tm-sd[data-hr="16"][data-dw="6"]::before, #tm-sd[data-hr="17"][data-dw="0"]::before, #tm-sd[data-hr="17"][data-dw="6"]::before {
+  content: "⚽️";
+}
+#tm-sd[data-hr="09"][data-dw="1"]::before, #tm-sd[data-hr="09"][data-dw="2"]::before, #tm-sd[data-hr="09"][data-dw="3"]::before, #tm-sd[data-hr="09"][data-dw="4"]::before, #tm-sd[data-hr="09"][data-dw="5"]::before, #tm-sd[data-hr="10"][data-dw="1"]::before, #tm-sd[data-hr="10"][data-dw="2"]::before, #tm-sd[data-hr="10"][data-dw="3"]::before, #tm-sd[data-hr="10"][data-dw="4"]::before, #tm-sd[data-hr="10"][data-dw="5"]::before, #tm-sd[data-hr="11"][data-dw="1"]::before, #tm-sd[data-hr="11"][data-dw="2"]::before, #tm-sd[data-hr="11"][data-dw="3"]::before, #tm-sd[data-hr="11"][data-dw="4"]::before, #tm-sd[data-hr="11"][data-dw="5"]::before, #tm-sd[data-hr="13"][data-dw="1"]::before, #tm-sd[data-hr="13"][data-dw="2"]::before, #tm-sd[data-hr="13"][data-dw="3"]::before, #tm-sd[data-hr="13"][data-dw="4"]::before, #tm-sd[data-hr="13"][data-dw="5"]::before, #tm-sd[data-hr="14"][data-dw="1"]::before, #tm-sd[data-hr="14"][data-dw="2"]::before, #tm-sd[data-hr="14"][data-dw="3"]::before, #tm-sd[data-hr="14"][data-dw="4"]::before, #tm-sd[data-hr="14"][data-dw="5"]::before, #tm-sd[data-hr="15"][data-dw="1"]::before, #tm-sd[data-hr="15"][data-dw="2"]::before, #tm-sd[data-hr="15"][data-dw="3"]::before, #tm-sd[data-hr="15"][data-dw="4"]::before, #tm-sd[data-hr="15"][data-dw="5"]::before, #tm-sd[data-hr="16"][data-dw="1"]::before, #tm-sd[data-hr="16"][data-dw="2"]::before, #tm-sd[data-hr="16"][data-dw="3"]::before, #tm-sd[data-hr="16"][data-dw="4"]::before, #tm-sd[data-hr="16"][data-dw="5"]::before, #tm-sd[data-hr="17"][data-dw="1"]::before, #tm-sd[data-hr="17"][data-dw="2"]::before, #tm-sd[data-hr="17"][data-dw="3"]::before, #tm-sd[data-hr="17"][data-dw="4"]::before, #tm-sd[data-hr="17"][data-dw="5"]::before {
+  content: "✍️";
+}
+#tm-sd[data-hr="18"]::before, #tm-sd[data-hr="19"]::before, #tm-sd[data-hr="20"]::before, #tm-sd[data-hr="21"]::before {
+  content: "🍺";
+}
+
+#tm-dt {
+  font-size: xx-large;
+  border-radius: 20%;
+  border-bottom: 4px solid LightGray;
+  background: rgba(244, 248, 220, 0.2);
+}
+#tm-dt::after {
+  content: attr(data-mo) "/" attr(data-dd) "/" attr(data-yr);
+}
+#tm-dt[data-dw="0"] {
+  color: red;
+}
+#tm-dt[data-dw="0"]::before {
+  content: "Sun ";
+}
+#tm-dt[data-dw="1"]::before {
+  content: "Mon ";
+}
+#tm-dt[data-dw="2"]::before {
+  content: "Tue ";
+}
+#tm-dt[data-dw="3"]::before {
+  content: "Wed ";
+}
+#tm-dt[data-dw="4"]::before {
+  content: "Thu ";
+}
+#tm-dt[data-dw="5"]::before {
+  content: "Fri ";
+}
+#tm-dt[data-dw="6"] {
+  color: blue;
+}
+#tm-dt[data-dw="6"]::before {
+  content: "Sat ";
+}
+
+#tm-ct[data-ct=Tokyo], #tm-ct[data-ct="San Francisco"] {
+  font-weight: bold;
+  color: black;
+  border-radius: 50%;
+  background: rgba(244, 248, 220, 0.3);
+  border: 8px solid rgba(255, 255, 0, 0.4);
+}
+
+#tm-ct {
+  font-family: Helvetica, sans-serif;
+  color: DarkGray;
+}
+#tm-ct::before {
+  content: attr(data-ct);
+}
+#tm-ct::after {
+  content: " " attr(data-cs);
+}
+@keyframes blink {
+  to {
+    opacity: 0;
+  }
+}
+.vid-cont {
+  position: fixed;
+  left: 0;
+  top: 0;
+  text-align: left;
+  width: 100%;
+  height: 100%;
+  font-family: Helvetica, Verdana;
+  z-index: -100;
+}
+.vid-cont::before {
+  font-size: small;
+  margin: 10px;
+  color: DarkGreen;
+  content: attr(data-src);
+}
+
+.vid-fw {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 5%;
+  border: 2px solid Silver;
+  box-shadow: 0 0 10px 6px Cyan;
+  object-fit: cover;
+  z-index: -100;
+  transition: all 1s ease-in;
+}
+.vid-fw:hover {
+  box-shadow: 0 0 10px 6px Magenta;
+}
+.vid-fw:focus {
+  outline: 0;
+}
+
+.btn-cont {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  margin-left: 10px;
+  padding-top: 120px;
+}
+
+.test-btn {
+  left: 10px;
+  top: 10px;
+  padding: 4px;
+  margin: 2px;
+  border-radius: 10%;
+  background-color: Gainsboro;
+  border: 2px solid #4caf50;
+  color: black;
+  padding: 4px 4px;
+  font: small "Courier New", sans-serif;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+}
+
+.test-btn:disabled,
+test-btn[disabled] {
+  border: 1px solid olive;
+  background-color: darkgray;
+  color: SlateGray;
+}
+
+/*# sourceMappingURL=App.css.map */
